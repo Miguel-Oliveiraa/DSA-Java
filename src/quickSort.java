@@ -68,10 +68,11 @@ public class quickSort {
 //         int temp = lista[i];
 //         lista[i] = lista[j];
 //         lista[j] = temp;
-//     } while (i>=j);
+//     } while (i<j);
 //     int temp = lista[i];
 //     lista[i] = lista[j];
 //     lista[j] = temp;
+
 //     temp = lista[l];
 //     lista[l] = lista[j];
 //     lista[j] = temp;
@@ -81,12 +82,12 @@ public class quickSort {
 // void quickSort(int lista[], int l, int r) {
 //     if (l<r){
 //         int pi = partition(lista, l, r);
-//         quickSort(lista,l,pi);
+//         quickSort(lista,l,pi-1);
 //         quickSort(lista,pi+1,r);
 //     }
 // }
 
-// int mainQSort(){
+// int main(){
 //     int numeros[] = {75, 456, 54, 43, 3, 9, 7, 0, 2, 123};
 //     int size = (sizeof(numeros)/ sizeof(int));
 //     cout << "Antes: ";
