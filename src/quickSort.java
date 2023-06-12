@@ -43,3 +43,58 @@ public class quickSort {
         }
     }
 }
+
+// #include <iostream>
+// using namespace std;
+
+// void printLista(int lista[], int size){
+//     for (int i = 0; i < size; i++)
+//         if (i == size-1) {
+//             cout << lista[i] << "\n";
+//         } else {
+//             cout << lista[i] << ", ";
+//         }
+// }
+
+// int partition(int lista[], int l, int r) {
+//     int pi = lista[l], i = l, j = r+1;
+//     do {
+//         do {
+//             i++;
+//         } while (lista[i]<pi && i < r);
+//         do {
+//             j--;
+//         } while (lista[j]>pi);
+//         int temp = lista[i];
+//         lista[i] = lista[j];
+//         lista[j] = temp;
+//     } while (i>=j);
+//     int temp = lista[i];
+//     lista[i] = lista[j];
+//     lista[j] = temp;
+//     temp = lista[l];
+//     lista[l] = lista[j];
+//     lista[j] = temp;
+//     return j;
+// }
+
+// void quickSort(int lista[], int l, int r) {
+//     if (l<r){
+//         int pi = partition(lista, l, r);
+//         quickSort(lista,l,pi);
+//         quickSort(lista,pi+1,r);
+//     }
+// }
+
+// int mainQSort(){
+//     int numeros[] = {75, 456, 54, 43, 3, 9, 7, 0, 2, 123};
+//     int size = (sizeof(numeros)/ sizeof(int));
+//     cout << "Antes: ";
+//     printLista(numeros, size);
+//     quickSort(numeros, 0, size-1);
+//     cout << "Depois: ";
+//     printLista(numeros, size);
+//     cout << "\n";
+
+//     return 0;
+// }
