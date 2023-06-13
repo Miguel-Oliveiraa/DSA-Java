@@ -1,16 +1,19 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class quickSort {
     public static void main(String[] args) throws IOException {
-        int[] array = {8,2,5,3,9,4,7,6,1};
+//        int[] array = {8,2,5,3,9,4,7,6,1};
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(5,6,9,1,4,6));
         System.out.println("Antes");
-        printList(array);
-        quickSort(array, 0, array.length - 1);
+        System.out.println(array);
+        quickSort(array, 0, array.size()-1);
         System.out.println("Depois");
-        printList(array);
+        System.out.println(array);
     }
 
-    private static void quickSort(int[] array, int s, int e) {
+    private static void quickSort(ArrayList<Integer> array, int s, int e) {
         if (s < e) {
             int pivot = partition(array, s, e);
             quickSort(array, s, pivot - 1);
@@ -18,29 +21,43 @@ public class quickSort {
         }
     }
 
-    private static int partition(int[] array, int s, int e) {
-        int pivot = array[e];
-        int i = s - 1;
-
-        for (int j = s; j < e ; j++) {
-            if(array[j]<pivot) {
-                int temp = array[++i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
-        }
-        i++;
-        int temp = array[i];
-        array[i] = array[e];
-        array[e] = temp;
-
-        return i;
-    }
-
-    private static void printList(int[] array) {
-        for (int i : array) {
-            System.out.print(i + " ");
-        }
+    private static int partition(ArrayList<Integer> array, int s, int e) {
+        int pivot = array.get(s);
+        int i = s;
+        int j = e+1;
+        do  {
+            do {
+                i = i + 1;
+            } while (array.get(i)<pivot && i<e);
+            do {
+                j = j -1;
+            } while (array.get(j)>pivot);
+            int temp = array.get(i);
+            array.set(i, array.get(j));
+            array.set(j, temp);
+        } while (i<j);
+        int temp = array.get(i);
+        array.set(i, array.get(j));
+        array.set(j, temp);
+        temp = array.get(s);
+        array.set(s, array.get(j));
+        array.set(j, temp);
+        return j;
+//        int pivot = array.get(e);
+//        int i = s - 1;
+//
+//        for (int j = s; j < e ; j++) {
+//            if(array.get(j)<pivot) {
+//                int temp = array.get(++i);
+//                array.set(i, array.get(j));
+//                array.set(j, temp);
+//            }
+//        }
+//        int temp = array.get(++i);
+//        array.set(i, array.get(e));
+//        array.set(e, temp);
+//
+//        return i;
     }
 }
 
