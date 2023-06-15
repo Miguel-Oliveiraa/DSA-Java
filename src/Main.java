@@ -20,7 +20,7 @@ public class Main {
 
         System.out.println("Números armazenados no ArrayList:");
         for (int numero : numeros) {
-            System.out.println(numero);
+            System.out.print(numero + " ");
         }
     }
 }
