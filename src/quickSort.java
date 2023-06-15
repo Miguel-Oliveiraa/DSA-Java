@@ -1,10 +1,6 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class quickSort {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int[] array = {8,2,5,3,9,4,7,6,1};
         System.out.println("Antes");
         printArray(array);
