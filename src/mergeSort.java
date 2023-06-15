@@ -2,10 +2,11 @@ public class mergeSort {
     public static void main(String[] args) {
         int numeros[] = {75, 456, 54, 43, 3, 9, 7, 0, 2, 123};
         System.out.println("Antes:");
-        printList(numeros);
+        printArray(numeros);
+        System.out.println("");
         mergeSort(numeros, 0, numeros.length-1);
         System.out.println("Depois:");
-        printList(numeros);
+        printArray(numeros);
     }
     public static void mergeSort(int[] lista, int l, int r) {
         if (l < r) {
@@ -37,9 +38,10 @@ public class mergeSort {
         }
     }
 
-    public static void printList(int[] lista) {
-        for (int i = 0; i < lista.length; i++) {
-            System.out.println(lista[i]);
+    private static void printArray(int[] array) {
+        for (int i :
+                array) {
+            System.out.print(i + " ");
         }
     }
 }
