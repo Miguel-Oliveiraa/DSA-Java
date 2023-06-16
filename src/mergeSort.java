@@ -1,12 +1,39 @@
+import java.util.Scanner;
+
+//A entrada consiste de vários casos. A primeira linha contém o inteiro c (1 ≤ c ≤ 10), o número de casos.
+//A primeira linha de cada caso contém o inteiro n (1 ≤ n ≤ 105), o tamanho do array que deve ser ordenado.
+//A segunda linha de cada caso contém n inteiros separados por espaço, os elementos do array.
+// input:
+//3
+//7
+//84 1 6 27 48 12 3
+//1
+//3
+//5
+//4 5 1 9 2
+// output:
+//1 3 6 12 27 48 84
+//3
+//1 2 4 5 9
+
+
 public class mergeSort {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        int numeros[] = {75, 456, 54, 43, 3, 9, 7, 0, 2, 123};
-        System.out.println("Antes:");
-        printArray(numeros);
-        System.out.println("");
-        mergeSort(numeros, 0, numeros.length-1);
-        System.out.println("Depois:");
-        printArray(numeros);
+        int cases = scanner.nextInt();
+        for (int i = 0; i < cases; i++) {
+            int size = scanner.nextInt();
+            int lista[] = new int[size];
+//            scanner.nextLine();
+//            String[] nome = scanner.nextLine().split(" ");
+            for (int j = 0; j < size; j++) {
+                lista[j] = scanner.nextInt();
+            }
+            mergeSort(lista, 0, lista.length-1);
+            printArray(lista);
+            System.out.println("");
+        }
     }
     public static void mergeSort(int[] lista, int l, int r) {
         if (l < r) {
