@@ -1,4 +1,4 @@
-package questions.list0;
+package questions.list00;
 
 import java.io.IOException;
 import java.util.Scanner;
