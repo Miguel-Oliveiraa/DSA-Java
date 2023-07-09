@@ -1,14 +1,15 @@
 package dataStructures;
 
 public class ArrayList<E> implements List<E> {
+    // Attributes
     private static final int defaultSize = 10; // Default size
     private int maxSize; // Max size of list
     private int listSize; // Current number of list items
     private int curr; // Current element pos
     private E[] listArray; // Array holding list elements
 
-    /* Create a list with the default size. */
-    ArrayList() {this(defaultSize);};
+    // Constructors
+    ArrayList() {this(defaultSize);}; // Create a list with the default size.
     @SuppressWarnings("unchecked") // Generic array allocation
     ArrayList(int size) {
         maxSize= size;
@@ -16,6 +17,7 @@ public class ArrayList<E> implements List<E> {
         listArray = (E[])new Object[size]; // Create listArray
     }
 
+    // Methods
     public void clear() {
         listSize = curr = 0; // Reinitialize  values
     }
@@ -48,9 +50,7 @@ public class ArrayList<E> implements List<E> {
     public void moveToStart() {
         curr = 0;
     }
-    public void moveToEnd() {
-        curr = listSize;
-    }
+    public void moveToEnd() { curr = listSize; }
 
     public void prev() {
         if (curr != 0)
