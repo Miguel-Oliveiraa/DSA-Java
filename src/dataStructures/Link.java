@@ -16,8 +16,16 @@ public class Link<E> {
     }
 
     // Methods
-    Link<E> next() { return next; } // Return next field
-    Link<E> setNext(Link<E> nextVal) { return next = nextVal;}  // Set next field
-    E element() { return element; } // Return element
-    E setElement(E it) { return element = it; } // Set element field
+    Link<E> next() {
+        return next; // Return next field
+    }
+    Link<E> setNext(Link<E> nextVal) {
+        return next = nextVal; // Set next field
+    }
+    E element() {
+        return element;  // Return element
+    }
+    E setElement(E it) {
+        return element = it; // Set element field
+    }
 }
