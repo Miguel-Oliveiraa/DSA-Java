@@ -10,7 +10,8 @@ public class ArrayList<E> implements List<E> {
 
     // Constructors
     ArrayList() {this(defaultSize);}; // Create a list with the default size.
-    @SuppressWarnings("unchecked") // Generic array allocation
+    @SuppressWarnings("unchecked")
+    public // Generic array allocation
     ArrayList(int size) {
         maxSize= size;
         listSize = curr = 0;
@@ -78,5 +79,13 @@ public class ArrayList<E> implements List<E> {
     public E getValue(){
         assert (curr>=0) && (curr < listSize) : "No current element";
         return listArray[curr];
+    }
+
+    public int count(E it){
+        int c = 0;
+        for (int i = 0; i < listSize; i++) {
+            if (listArray[i] == it) c++;
+        }
+        return c;
     }
 }

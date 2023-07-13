@@ -8,7 +8,7 @@ public class LinkedList<E> implements List<E> {
     private int cnt; // Size of list
 
     // Constructors
-    LinkedList(int size) {this();}
+    public LinkedList(int size) {this();}
     LinkedList() {
         curr = tail = head = new Link<E>(null); // Create header
         cnt = 0;
@@ -82,9 +82,18 @@ public class LinkedList<E> implements List<E> {
         }
     }
 
-
     public E getValue() {
         if(curr.next() == null) return null;
         return curr.next().element();
+    }
+
+    public int count(E it) {
+        int c = 0;
+        Link<E> temp = head;
+        while (temp.next() != null) {
+            if (temp.next().element() == it) c++;
+            temp = temp.next();
+        }
+        return c;
     }
 }
