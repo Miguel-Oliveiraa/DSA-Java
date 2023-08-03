@@ -17,8 +17,8 @@ public class Main{
             int numero = sc.nextInt();
             tree.insert(numero);
         }
-        ArrayList<Integer> result = tree.inOrderTraversal();
-        System.out.println(result);
+//        java.util.ArrayList<Integer> result = tree.i();
+//        System.out.println(result);
     }
 
     public static class AVLTree {
@@ -37,21 +37,21 @@ public class Main{
         private Node root;
 
 
-        public ArrayList<Integer> inOrderTraversal() {
-            ArrayList<Integer> result = new ArrayList<>();
-            inOrderTraversalHelper(root, result);
-            return result;
-        }
-
-        private void inOrderTraversalHelper(Node node, ArrayList<Integer> result) {
-            if (node == null) {
-                return;
-            }
-
-            inOrderTraversalHelper(node.left, result);
-            result.add(node.key);
-            inOrderTraversalHelper(node.right, result);
-        }
+//        public ArrayList<Integer> inOrderTraversal() {
+//            ArrayList<Integer> result = new ArrayList<>();
+//            inOrderTraversalHelper(root, result);
+//            return result;
+//        }
+//
+//        private void inOrderTraversalHelper(Node node, ArrayList<Integer> result) {
+//            if (node == null) {
+//                return;
+//            }
+//
+//            inOrderTraversalHelper(node.left, result);
+//            result.add(node.key);
+//            inOrderTraversalHelper(node.right, result);
+//        }
 
         public Node find(int key) {
             Node current = root;
