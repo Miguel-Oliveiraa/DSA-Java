@@ -1,21 +1,16 @@
-import dataStructures.AVLTree;
-
+package questions.EP4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.StringTokenizer;
-
-//list04 Q1
 public class Main {
-
-    public static FastReader sc = new FastReader();
-
+    private static FastReader sc = new FastReader();
     public static void main(String[] args) {
         int n = sc.nextInt();
-        AVLTree tree = new AVLTree();
+        AVLTreeTraining tree = new AVLTreeTraining();
         StringBuilder result = new StringBuilder();
-
         for (int i = 0; i < n; i++) {
             String query = sc.next();
             if (Objects.equals("insert", query)) {
@@ -36,15 +31,12 @@ public class Main {
             }
         }
         System.out.print(result);
-//        StringBuilder result = new StringBuilder(); // String para resultado final
-//        AVLTree tree = new AVLTree();
+//        AVLTreeTraining tree = new AVLTreeTraining();
 //        for (int i = 0; i < 1200; i++) {
-//            int input = sc.nextInt();
-//            tree.insert(input);
+//            int n = sc.nextInt();
+//            tree.insert(n);
 //        }
-//        int resultOrdenado = tree.getPos(99892);
-//        System.out.println(resultOrdenado);
-//        System.out.print(result); // Print final
+//        System.out.println(tree.inOrder());
     }
 
     static class FastReader {

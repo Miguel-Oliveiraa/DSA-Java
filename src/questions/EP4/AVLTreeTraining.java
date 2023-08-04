@@ -1,11 +1,11 @@
-package dataStructures;
+package questions.EP4;
 
-public class AVLTree {
+public class AVLTreeTraining {
 
     public class Node {
         int key;
         int height;
-        AVLTree.Node left;
+        AVLTreeTraining.Node left;
         Node right;
 
         Node(int key) {
