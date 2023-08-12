@@ -1,182 +1,179 @@
 package questions.list4;
-// Working program with FastReader
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
+import static java.lang.Math.max;
 
-public class Main{
-
-    public static FastReader sc = new FastReader();
-
+public class Main {
     public static void main(String[] args) {
-        AVLTree tree = new AVLTree();
+        StringBuilder result = new StringBuilder();
+        FastReader scanner = new FastReader();
 
-        for (int i = 0; i < 1200; i++) {
-            int numero = sc.nextInt();
-            tree.insert(numero);
+        int n = scanner.nextInt();
+        BST tree = create_BST();
+
+        for (int i = 0; i < n; i++) {
+            int op = scanner.nextInt();
+            int value = scanner.nextInt();
+
+            if (op == 1) {
+                insert(tree, value);
+            } else if (op == 2) {
+                int num = findIndex(tree, value);
+                if (num == 0) {
+                    result.append("Data tidak ada\n");
+                } else {
+                    result.append(num + "\n");
+                }
+            }
         }
-//        java.util.ArrayList<Integer> result = tree.i();
-//        System.out.println(result);
+        System.out.print(result);
+    }
+    static class BSTNode {
+        int key;
+        int height;
+        int childrenLeft;
+        int childrenRight;
+        BSTNode left;
+        BSTNode right;
+
+        BSTNode(int k) {
+            key = k;
+            left = null;
+            right = null;
+            childrenLeft = 0;
+            childrenRight = 0;
+            height = 0;
+        }
     }
 
-    public static class AVLTree {
+    static class BST {
+        BSTNode root;
+        int nodecount;
 
-        public class Node {
-                int key;
-                int height;
-                AVLTree.Node left;
-            Node right;
+        BST() {
+            root = null;
+            nodecount = 0;
+        }
+    }
 
-            Node(int key) {
-                this.key = key;
-            }
+    static BST create_BST() {
+        return new BST();
+    }
+
+    static BSTNode create_bstNode(int k) {
+        return new BSTNode(k);
+    }
+
+    static int findIndex(BST tree, int k) {
+        int flag = find(tree, k);
+        int i;
+
+        if (flag == -1) return 0;
+
+        i = findIndexHelp(tree.root, k);
+
+        return i;
+    }
+
+    static int findIndexHelp(BSTNode rt, int k) {
+        if (rt.key == k) return rt.childrenLeft + 1;
+        else if (rt.key < k) return rt.childrenLeft + 1 + findIndexHelp(rt.right, k);
+        else return findIndexHelp(rt.left, k);
+    }
+
+    static int find(BST bst, int k) {
+        return findhelp(bst.root, k);
+    }
+
+    static int findhelp(BSTNode rt, int k) {
+        if (rt == null) return -1;
+        if (rt.key > k) {
+            return findhelp(rt.left, k);
+        } else if (rt.key == k) {
+            return rt.key;
+        } else {
+            return findhelp(rt.right, k);
+        }
+    }
+
+    static void insert(BST bst, int k) {
+        bst.root = inserthelp(bst.root, k);
+        bst.nodecount++;
+    }
+
+    static BSTNode inserthelp(BSTNode rt, int k) {
+        if (rt == null) return create_bstNode(k);
+        if (rt.key > k) {
+            rt.childrenLeft++;
+            rt.left = inserthelp(rt.left, k);
+        } else {
+            rt.childrenRight++;
+            rt.right = inserthelp(rt.right, k);
         }
 
-        private Node root;
+        rt.height = 1 + max(h(rt.left), h(rt.right));
+        int balance = getBalance(rt);
 
-
-//        public ArrayList<Integer> inOrderTraversal() {
-//            ArrayList<Integer> result = new ArrayList<>();
-//            inOrderTraversalHelper(root, result);
-//            return result;
-//        }
-//
-//        private void inOrderTraversalHelper(Node node, ArrayList<Integer> result) {
-//            if (node == null) {
-//                return;
-//            }
-//
-//            inOrderTraversalHelper(node.left, result);
-//            result.add(node.key);
-//            inOrderTraversalHelper(node.right, result);
-//        }
-
-        public Node find(int key) {
-            Node current = root;
-            while (current != null) {
-                if (current.key == key) {
-                    break;
-                }
-                current = current.key < key ? current.right : current.left;
-            }
-            return current;
+        if (balance < -1 && k >= rt.right.key) return leftRotate(rt);
+        if (balance > 1 && k < rt.left.key) return rightRotate(rt);
+        if (balance > 1 && k >= rt.left.key) {
+            rt.left = leftRotate(rt.left);
+            return rightRotate(rt);
         }
-
-        public void insert(int key) {
-            root = insert(root, key);
+        if (balance < -1 && k < rt.right.key) {
+            rt.right = rightRotate(rt.right);
+            return leftRotate(rt);
         }
+        return rt;
+    }
 
-        public void delete(int key) {
-            root = delete(root, key);
-        }
+    static int getBalance(BSTNode rt) {
+        if (rt == null) return 0;
+        return (h(rt.left) - h(rt.right));
+    }
 
-        public Node getRoot() {
-            return root;
-        }
+    static int h(BSTNode rt) {
+        if (rt == null) return -1;
+        return rt.height;
+    }
 
-        public int height() {
-            return root == null ? -1 : root.height;
-        }
+    static BSTNode rightRotate(BSTNode rt) {
+        BSTNode l = rt.left;
+        BSTNode lr = l.right;
 
-        private Node insert(Node node, int key) {
-            if (node == null) {
-                return new Node(key);
-            } else if (node.key > key) {
-                node.left = insert(node.left, key);
-            } else if (node.key < key) {
-                node.right = insert(node.right, key);
-            } else {
-                System.out.println("duplicate key");
-//                throw new RuntimeException("duplicate Key!");
-            }
-            return rebalance(node);
-        }
+        int lRightC = l.childrenRight;
+        int rtRgithC = rt.childrenRight;
 
-        private Node delete(Node node, int key) {
-            if (node == null) {
-                return node;
-            } else if (node.key > key) {
-                node.left = delete(node.left, key);
-            } else if (node.key < key) {
-                node.right = delete(node.right, key);
-            } else {
-                if (node.left == null || node.right == null) {
-                    node = (node.left == null) ? node.right : node.left;
-                } else {
-                    Node mostLeftChild = mostLeftChild(node.right);
-                    node.key = mostLeftChild.key;
-                    node.right = delete(node.right, node.key);
-                }
-            }
-            if (node != null) {
-                node = rebalance(node);
-            }
-            return node;
-        }
+        l.childrenRight = lRightC + rtRgithC + 1;
+        rt.childrenLeft = lRightC;
 
-        private Node mostLeftChild(Node node) {
-            Node current = node;
-            /* loop down to find the leftmost leaf */
-            while (current.left != null) {
-                current = current.left;
-            }
-            return current;
-        }
+        l.right = rt;
+        rt.left = lr;
+        rt.height = max(h(rt.left), h(rt.right)) + 1;
+        l.height = max(h(l.left), h(l.right)) + 1;
 
-        private Node rebalance(Node z) {
-            updateHeight(z);
-            int balance = getBalance(z);
-            if (balance > 1) {
-                if (height(z.right.right) > height(z.right.left)) {
-                    z = rotateLeft(z);
-                } else {
-                    z.right = rotateRight(z.right);
-                    z = rotateLeft(z);
-                }
-            } else if (balance < -1) {
-                if (height(z.left.left) > height(z.left.right)) {
-                    z = rotateRight(z);
-                } else {
-                    z.left = rotateLeft(z.left);
-                    z = rotateRight(z);
-                }
-            }
-            return z;
-        }
+        return l;
+    }
 
-        private Node rotateRight(Node y) {
-            Node x = y.left;
-            Node z = x.right;
-            x.right = y;
-            y.left = z;
-            updateHeight(y);
-            updateHeight(x);
-            return x;
-        }
+    static BSTNode leftRotate(BSTNode rt) {
+        BSTNode r = rt.right;
+        BSTNode rl = r.left;
 
-        private Node rotateLeft(Node y) {
-            Node x = y.right;
-            Node z = x.left;
-            x.left = y;
-            y.right = z;
-            updateHeight(y);
-            updateHeight(x);
-            return x;
-        }
+        int rLeftC = r.childrenLeft;
+        int rtLeftC = rt.childrenLeft;
 
-        private void updateHeight(Node n) {
-            n.height = 1 + Math.max(height(n.left), height(n.right));
-        }
+        r.childrenLeft = rLeftC + rtLeftC + 1;
+        rt.childrenRight = rLeftC;
 
-        private int height(Node n) {
-            return n == null ? -1 : n.height;
-        }
+        r.left = rt;
+        rt.right = rl;
+        rt.height = max(h(rt.left), h(rt.right)) + 1;
+        r.height = max(h(r.left), h(r.right)) + 1;
 
-        public int getBalance(Node n) {
-            return (n == null) ? 0 : height(n.right) - height(n.left);
-        }
+        return r;
     }
 
     static class FastReader {

@@ -1,70 +1,99 @@
 package questions.list02;
 
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
+
 
 public class Main {
-
     public static void main(String[] args) {
-        FastScanner con = new FastScanner(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
+        LinkedList texto = new LinkedList();
 
-        int n;
-
-
-        while((n = con.nextInt()) != 0) {
-            int x, cur, ok;
-            while((x = con.nextInt()) != 0) {
-                cur = ok = 1;
-                Stack<Integer> s = new Stack<Integer>();
-                for(int i = 1; i < n; i++) {
-                    for(; cur <= x; cur++) s.push(cur);
-                    if (s.peek() != x) ok = 0;
-                    s.pop();
-                    x = con.nextInt();
+        while (scanner.hasNext()) {
+            String entrada = scanner.next();
+            for (int i = 0; i < entrada.length(); i++) {
+                if (entrada.charAt(i) == '[') {
+                    texto.moveToStart();
+                } else if (entrada.charAt(i) == ']') {
+                    texto.moveToEnd();
+                } else {
+                    texto.insert(entrada.charAt(i));
                 }
-
-                String Answer = (ok == 1) ? "Yes" : "No";
-
-                System.out.println(Answer);
             }
 
-            System.out.println("");
-
+            texto.print();
+            texto.clear();
         }
     }
-}
 
+    static class LinkedList {
+        static class Node {
+            public char data;
+            public Node next;
 
+            public Node(char element, Node nextNode) {
+                data = element;
+                next = nextNode;
+            }
 
-class FastScanner {
-    private BufferedReader br;
-
-    private StringTokenizer st;
-
-    public FastScanner(InputStreamReader reader) {
-        br = new BufferedReader(reader);
-    }
-
-    public String next() {
-        while (st == null || !st.hasMoreTokens()) {
-            try {
-                st = new StringTokenizer(br.readLine());
-            } catch (Exception e) {
-                e.printStackTrace();
+            public Node(Node nextNode) {
+                next = nextNode;
             }
         }
-        return st.nextToken();
+        private Node head;
+        private Node tail;
+        private Node curr;
+        private int size;
+
+        private void init() {
+            curr = tail = head = new Node(null);
+            size = 0;
+        }
+
+        private void removeAll() {
+            while (head != null) {
+                curr = head;
+                head = head.next;
+                curr = null;  // Manually set to null for garbage collection
+            }
+        }
+
+        public LinkedList() {
+            init();
+        }
+
+        public void clear() {
+            removeAll();
+            init();
+            curr = tail = head;
+        }
+
+        public void insert(char value) {
+            curr.next = new Node(value, curr.next);
+            if (tail == curr) {
+                tail = curr.next;
+            }
+            curr = curr.next;
+            size++;
+        }
+
+        public void moveToStart() {
+            curr = head;
+        }
+
+        public void moveToEnd() {
+            curr = tail;
+        }
+
+        public void print() {
+            curr = head.next;
+            while (curr != null) {
+                System.out.print(curr.data);
+                curr = curr.next;
+            }
+            System.out.println();
+        }
     }
 
-    public int nextInt() {
-        return Integer.parseInt(next());
-    }
 
-    public double nextDouble() {
-        return Double.parseDouble(next());
-    }
-
-    public void close() throws Exception {
-        br.close();
-    }
 }
+
