@@ -6,14 +6,30 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class q1 {
-//    private static FastReader sc = new FastReader();
+    private static FastReader sc = new FastReader();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (scanner.hasNextLine()) {
-            String teste = scanner.nextLine();
-            System.out.println(cases(teste));
+        while (true) {
+            System.out.println(cases(sc.next()));
         }
+//        StringBuilder result = new StringBuilder();
+//        String cadena;
+//        boolean cond = true;
+//        while (cond) {
+//            cadena = scanner.nextLine();
+//            if(cadena.isEmpty()) {
+//                cond = false;
+//            }
+////            String teste = sc.next();
+//            result.append(cases(cadena)+"\n");
+//        }
+//        System.out.print(result);
+
+//        while (scanner.hasNextLine()) {
+//            String teste = sc.next();
+//            System.out.println(cases(teste));
+//        }
     }
 
     public static StringBuilder cases(String nome) {
