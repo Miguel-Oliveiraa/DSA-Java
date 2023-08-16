@@ -1,11 +1,6 @@
-import dataStructures.DirectedMatrixGraph;
-import dataStructures.UndirectedMatrixGraph;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 //list04 Q1
@@ -14,45 +9,6 @@ public class Main {
     public static FastReader sc = new FastReader();
 
     public static void main(String[] args) {
-//        Questão 01 AP 10
-//        StringBuilder result = new StringBuilder();
-//
-//        int n = sc.nextInt();
-//        int v = sc.nextInt();
-//        UndirectedMatrixGraph graph = new UndirectedMatrixGraph(n);
-//        for (int i = 0; i < v; i++) {
-//            String op = sc.next();
-//            if (Objects.equals(op, "add")){
-//                int graph1 = sc.nextInt();
-//                int graph2 = sc.nextInt();
-//                graph.setEdge(graph1, graph2, 1);
-//            } else if(Objects.equals(op, "BFS")) {
-//                int start = sc.nextInt();
-//                result.append(graph.bfsGraphTraverse(start) + "\n");
-//            } else if(Objects.equals(op, "DFS")) {
-//                int start = sc.nextInt();
-//                result.append(graph.dfsGraphTraverse(start) + "\n");
-//            }
-//        }
-//        System.out.println(result);
-
-//        Questão 02 AP 10
-        StringBuilder result = new StringBuilder();
-
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        DirectedMatrixGraph graph = new DirectedMatrixGraph(n);
-        for (int i = 0; i < m; i++) {
-            int graph1 = sc.nextInt();
-            int graph2 = sc.nextInt();
-            graph.setEdge(graph1, graph2, 1);
-        }
-        Stack<Integer> topography = graph.topoGraphSort();
-
-        while (!topography.empty()) {
-            result.append(topography.pop() + " ");
-        }
-        System.out.println(result);
     }
 
     static class FastReader {
