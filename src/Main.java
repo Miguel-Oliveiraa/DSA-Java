@@ -1,4 +1,4 @@
-import dataStructures.AVLTree;
+import dataStructures.DirectedMatrixGraph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,38 +13,22 @@ public class Main {
 
     public static void main(String[] args) {
         int n = sc.nextInt();
-        AVLTree tree = new AVLTree();
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < n; i++) {
-            String query = sc.next();
-            if (Objects.equals("insert", query)) {
-                int value = sc.nextInt();
-                tree.insert(value);
-            } else if (Objects.equals("pre", query)) {
-                StringBuilder queryResult = tree.preOrder();
-                queryResult.deleteCharAt(queryResult.length() - 1);
-                result.append(queryResult + "\n");
-            } else if (Objects.equals("in", query)) {
-                StringBuilder queryResult = tree.inOrder();
-                queryResult.deleteCharAt(queryResult.length() - 1);
-                result.append(queryResult + "\n");
-            } else {
-                StringBuilder queryResult = tree.posOrder();
-                queryResult.deleteCharAt(queryResult.length() - 1);
-                result.append(queryResult + "\n");
+        int v = sc.nextInt();
+        DirectedMatrixGraph graph = new DirectedMatrixGraph(n);
+        for (int i = 0; i < v; i++) {
+            String op = sc.next();
+            if (Objects.equals(op, "add")){
+                int graph1 = sc.nextInt();
+                int graph2 = sc.nextInt();
+                graph.setEdge(graph1, graph2, 1);
+            } else if(Objects.equals(op, "BFS")) {
+                int start = sc.nextInt();
+//                graph.dfsGraphTraverse();
+            } else if(Objects.equals(op, "DFS")) {
+                int start = sc.nextInt();
+                graph.dfsGraphTraverse(start);
             }
         }
-        System.out.print(result);
-//        StringBuilder result = new StringBuilder(); // String para resultado final
-//        AVLTree tree = new AVLTree();
-//        for (int i = 0; i < 1200; i++) {
-//            int input = sc.nextInt();
-//            tree.insert(input);
-//        }
-//        int resultOrdenado = tree.getPos(99892);
-//        System.out.println(resultOrdenado);
-//        System.out.print(result); // Print final
     }
 
     static class FastReader {

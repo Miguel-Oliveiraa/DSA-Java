@@ -1,11 +1,11 @@
 package dataStructures;
 
-public class MatrixGraph implements Graph {
+public class DirectedMatrixGraph implements Graph {
     int[][] matrix;
     int numEdge;
     int[] mark;
 
-    public MatrixGraph(int n) {
+    public DirectedMatrixGraph(int n) {
         mark = new int[n];
         matrix = new int[n][n];
         numEdge = 0;
@@ -70,20 +70,22 @@ public class MatrixGraph implements Graph {
         return mark[v];
     }
 
-    void dfsGraphTraverse() {
+    public void dfsGraphTraverse(int start) {
         for (int i = 0; i < matrix.length; i++) {
             setMark(i, -1);
         }
 
-        for (int i = 0; i < matrix.length; i++) {
-            if (getMark(i) == -1) {
-                DFS(i);
-            }
-        }
+        DFS(start);
+//        for (int i = 0; i < matrix.length; i++) {
+//            if (getMark(i) == -1) {
+//                DFS(i);
+//            }
+//        }
     }
 
     void DFS(int i) {
 //        pre visit
+        System.out.println(i);
         setMark(i, 1);
         int w = first(i);
         while (w < matrix.length) {
@@ -92,6 +94,7 @@ public class MatrixGraph implements Graph {
             }
             w = next(i,w);
         }
+//        System.out.println(i);
 //        pos visit
     }
 }
