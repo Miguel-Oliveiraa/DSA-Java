@@ -2,6 +2,7 @@ package dataStructures;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class UndirectedMatrixGraph implements Graph {
     int[][] matrix;
@@ -135,5 +136,31 @@ public class UndirectedMatrixGraph implements Graph {
             }
             //posvisit
         }
+    }
+
+    public Stack<Integer> topoGraphSort() {
+        for (int i = 0; i < matrix.length; i++) {
+            setMark(i, -1);
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < matrix.length; i++) {
+            if (getMark(i) == -1) {
+                toposort(i, stack);
+            }
+        }
+        return stack;
+    }
+
+    void toposort(int v, Stack<Integer> s) {
+        setMark(v, 1);
+        int w = first(v);
+        while (w < matrix.length) {
+            if (getMark(w) == -1) {
+                toposort(w, s);
+            }
+            w = next(v,w);
+        }
+        s.push(v);
     }
 }
