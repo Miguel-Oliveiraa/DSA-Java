@@ -1,5 +1,8 @@
 package dataStructures;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class DirectedMatrixGraph implements Graph {
     int[][] matrix;
     int numEdge;
@@ -70,12 +73,15 @@ public class DirectedMatrixGraph implements Graph {
         return mark[v];
     }
 
-    public void dfsGraphTraverse(int start) {
+    public StringBuilder dfsGraphTraverse(int start) {
         for (int i = 0; i < matrix.length; i++) {
             setMark(i, -1);
         }
 
-        DFS(start);
+        StringBuilder result = new StringBuilder();
+        DFS(start, result);
+        return result;
+//        Gustavo faz assim no slide
 //        for (int i = 0; i < matrix.length; i++) {
 //            if (getMark(i) == -1) {
 //                DFS(i);
@@ -83,18 +89,49 @@ public class DirectedMatrixGraph implements Graph {
 //        }
     }
 
-    void DFS(int i) {
+    void DFS(int i, StringBuilder result) {
 //        pre visit
-        System.out.println(i);
+//        System.out.println(i);
+        result.append(i + " ");
         setMark(i, 1);
         int w = first(i);
         while (w < matrix.length) {
             if (getMark(w) == -1) {
-                DFS(w);
+                DFS(w, result);
             }
             w = next(i,w);
         }
 //        System.out.println(i);
 //        pos visit
+    }
+
+    public StringBuilder bfsGraphTraverse(int start) {
+        for (int i = 0; i < matrix.length; i++) {
+            setMark(i, -1);
+        }
+        StringBuilder result = new StringBuilder();
+        BFS(start, result);
+        return result;
+    }
+
+    void BFS(int start, StringBuilder result) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        setMark(start, 1);
+        while (queue.size() > 0) {
+            int v = queue.poll();
+            //Previsit
+//            System.out.println(v);
+            result.append(v + " ");
+            int w = first(v);
+            while (w < matrix.length) {
+                if (getMark(w) == -1) {
+                    setMark(w, 1);
+                    queue.offer(w);
+                }
+                w = next(v,w);
+            }
+            //posvisit
+        }
     }
 }
