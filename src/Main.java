@@ -1,4 +1,5 @@
 import dataStructures.DirectedMatrixGraph;
+import dataStructures.UndirectedMatrixGraph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +13,11 @@ public class Main {
     public static FastReader sc = new FastReader();
 
     public static void main(String[] args) {
+        StringBuilder result = new StringBuilder();
+
         int n = sc.nextInt();
         int v = sc.nextInt();
-        DirectedMatrixGraph graph = new DirectedMatrixGraph(n);
+        UndirectedMatrixGraph graph = new UndirectedMatrixGraph(n);
         for (int i = 0; i < v; i++) {
             String op = sc.next();
             if (Objects.equals(op, "add")){
@@ -23,12 +26,13 @@ public class Main {
                 graph.setEdge(graph1, graph2, 1);
             } else if(Objects.equals(op, "BFS")) {
                 int start = sc.nextInt();
-//                graph.dfsGraphTraverse();
+                result.append(graph.bfsGraphTraverse(start) + "\n");
             } else if(Objects.equals(op, "DFS")) {
                 int start = sc.nextInt();
-                graph.dfsGraphTraverse(start);
+                result.append(graph.dfsGraphTraverse(start) + "\n");
             }
         }
+        System.out.println(result);
     }
 
     static class FastReader {
