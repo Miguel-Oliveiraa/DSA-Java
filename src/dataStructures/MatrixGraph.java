@@ -62,11 +62,36 @@ public class MatrixGraph implements Graph {
 
     @Override
     public void setMark(int v, int val) {
-
+        mark[v] = val;
     }
 
     @Override
     public int getMark(int v) {
-        return 0;
+        return mark[v];
+    }
+
+    void dfsGraphTraverse() {
+        for (int i = 0; i < matrix.length; i++) {
+            setMark(i, -1);
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            if (getMark(i) == -1) {
+                DFS(i);
+            }
+        }
+    }
+
+    void DFS(int i) {
+//        pre visit
+        setMark(i, 1);
+        int w = first(i);
+        while (w < matrix.length) {
+            if (getMark(w) == -1) {
+                DFS(w);
+            }
+            w = next(i,w);
+        }
+//        pos visit
     }
 }
