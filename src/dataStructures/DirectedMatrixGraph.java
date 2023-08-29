@@ -1,5 +1,6 @@
 package dataStructures;
 
+import java.util.*;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -161,4 +162,59 @@ public class DirectedMatrixGraph implements Graph {
         }
         s.push(v);
     }
+
+    //dijkstra's algorithm
+    public void dijkstras(int s, int[] D) {
+        //Parents
+        int[] p = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            setMark(i, -1);
+            D[i] = 1337;
+            p[i] = -1;
+        }
+        D[s] = 0;
+
+        //criando comparador para heap
+        Comparator<HeapStruct> customComparator = new Comparator<HeapStruct>() {
+            @Override
+            public int compare(HeapStruct s1, HeapStruct s2) {
+                // Compare based on the first element
+                return Integer.compare(s1.element3, s2.element3);
+            }
+        };
+        // heap para armazenar os caminhos
+        PriorityQueue<HeapStruct> minHeap = new PriorityQueue<>(customComparator);
+        minHeap.offer(new HeapStruct(s,s,0));
+
+        for (int i = 0; i < matrix.length; i++) {
+            HeapStruct temp;
+            do {
+                if (minHeap.isEmpty()) return;
+                temp = minHeap.poll();
+            } while (getMark(temp.element2) != -1);
+
+            setMark(temp.element2, 1);
+            int w = first(temp.element2);
+            while (w<matrix.length) {
+                if (getMark(w) == -1 && D[w] > D[temp.element2] + matrix[temp.element2][w]) {
+                    D[w] = D[temp.element2] + matrix[temp.element2][w];
+                    minHeap.offer(new HeapStruct(temp.element2, w, D[w]));
+                }
+                w = next(temp.element2, w);
+            }
+        }
+    }
+
+    static class HeapStruct {
+        int element1;
+        int element2;
+        int element3;
+
+        public HeapStruct(int element1, int element2, int element3) {
+            this.element1 = element1;
+            this.element2 = element2;
+            this.element3 = element3;
+        }
+    }
+
 }
