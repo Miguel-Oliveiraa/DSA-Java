@@ -3,8 +3,6 @@ import dataStructures.DirectedMatrixGraph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 //list04 Q1
@@ -23,7 +21,8 @@ public class Main {
             for (int j = 0; j < a; j++) {
                 int num1 = sc.nextInt();
                 int num2 = sc.nextInt();
-                grafo.setEdge(num1, num2, 1);
+                int distance = sc.nextInt();
+                grafo.setEdge(num1, num2, distance);
             }
 
             int n = sc.nextInt();
@@ -33,7 +32,11 @@ public class Main {
                 result.append("Distancias vertice " + vertice + ":\n");
                 grafo.dijkstras(vertice, distance);
                 for (int k = 0; k < v; k++) {
-                    result.append(distance[k] + " ");
+                    if (distance[k] == 1337) {
+                        result.append(-1 + " ");
+                    } else {
+                        result.append(distance[k] + " ");
+                    }
                 }
                 result.append("\n");
             }
