@@ -43,35 +43,35 @@ public class quickSort {
 
     private static int partition(int[] array, int s, int e) {
 //        ordem crescente
-//        int pivot = array[s];
-//        int i = s,j = e+1;
-//        do  {
-//            do {
-//                i = i + 1;
-//            } while (array[i]<pivot && i<e);
-//            do {
-//                j = j - 1;
-//            } while (array[j]>pivot);
-//            swap(array, i, j);
-//        } while (i<j);
-//        swap(array, i, j);
-//        swap(array, s, j);
-//        return j;
+       int pivot = array[s];
+       int i = s,j = e+1;
+       do  {
+           do {
+               i = i + 1;
+           } while (array[i]<pivot && i<e);
+           do {
+               j = j - 1;
+           } while (array[j]>pivot);
+           swap(array, i, j);
+       } while (i<j);
+       swap(array, i, j);
+       swap(array, s, j);
+       return j;
 //        ordem não-crescente
-        int pivot = array[e];
-        int i = s-1, j = e;
-        do {
-            do {
-                i = i + 1;
-            }while (array[i]>pivot);
-            do {
-                j = j -1;
-            } while (array[j]<pivot && j>s);
-            swap(array,i,j);
-        } while (j>i);
-        swap(array,i,j);
-        swap(array,e,i);
-        return i;
+        // int pivot = array[e];
+        // int i = s-1, j = e;
+        // do {
+        //     do {
+        //         i = i + 1;
+        //     }while (array[i]>pivot);
+        //     do {
+        //         j = j -1;
+        //     } while (array[j]<pivot && j>s);
+        //     swap(array,i,j);
+        // } while (j>i);
+        // swap(array,i,j);
+        // swap(array,e,i);
+        // return i;
     }
 
     private static void swap(int[] array, int i, int j){
