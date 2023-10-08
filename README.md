@@ -15,7 +15,7 @@ Ao usar StringBuilder, você pode construir seu conteúdo de string eficientemen
 
 Aqui está um exemplo prático:
 
-```
+```java
 public class ExemploStringBuilder {
     public static void main(String[] args) {
         StringBuilder builder = new StringBuilder();
@@ -39,7 +39,7 @@ O FastReader é uma solução eficaz para leitura rápida de dados. Ele minimiza
 
 Aqui está um exemplo de como você pode utilizar o FastReader:
 
-```
+```java
 import java.io.BufferedReader; 
 import java.io.IOException; 
 import java.io.InputStreamReader; 
