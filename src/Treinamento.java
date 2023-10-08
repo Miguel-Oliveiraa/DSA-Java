@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 //list04 Q1
-public class Main {
+public class Treinamento {
 
     public static FastReader sc = new FastReader();
 
