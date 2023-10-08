@@ -1,39 +1,59 @@
 package questions.iudex.ep1;
 
-import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Consultas {
+public class Numeros {
 
     public static FastReader scanner = new FastReader();
 
     public static void main(String[] args) {
-        int t = scanner.nextInt();
-        String[] pessoasCadastradas = new String[t];
-//        scanner.nextLine();
-        for (int i = 0; i < t; i++) {
-            pessoasCadastradas[i] = scanner.nextLine();
+        int n = scanner.nextInt();
+        StringBuilder stringBuilder = new StringBuilder(n);
+        int[] lista = new int[n];
+        for (int i = 0; i < n; i++) {
+            lista[i] = scanner.nextInt();
         }
-        int q = scanner.nextInt();
-//        scanner.nextLine();
-        for (int i = 0; i < q; i++) {
-            System.out.println(buscaBinaria(pessoasCadastradas, scanner.nextLine()));
+        quickSort(lista, 0, lista.length-1);
+
+        for (int numero :
+                lista) {
+            stringBuilder.append(numero + "\n");
+        }
+        System.out.print(stringBuilder.toString());
+    }
+
+    public static void quickSort(int[] array, int s, int e) {
+        if (s < e) {
+            int pivot = partition(array, s, e);
+            quickSort(array, s, pivot - 1);
+            quickSort(array, pivot + 1, e);
         }
     }
 
-    private static String buscaBinaria(String[] lista, String alvo) {
-        int l = 0;
-        int r = lista.length-1;
-        while (l<=r){
-            int m = l+(r-l)/2;
-            if (Objects.equals(lista[m], alvo)) return "+";
-            else if (alvo.compareTo(lista[m])<0) r = m-1;
-            else l = m+1;
-        }
-        return "-";
+    private static int partition(int[] array, int s, int e) {
+        int pivot = array[s];
+        int i = s, j = e + 1;
+        do {
+            do {
+                i = i + 1;
+            } while (array[i] < pivot && i < e);
+            do {
+                j = j - 1;
+            } while (array[j] > pivot);
+            swap(array, i, j);
+        } while (i < j);
+        swap(array, i, j);
+        swap(array, s, j);
+        return j;
+    }
+
+    private static void swap(int[] A, int x, int y) {
+        int temp = A[x];
+        A[x] = A[y];
+        A[y] = temp;
     }
 
     static class FastReader {
