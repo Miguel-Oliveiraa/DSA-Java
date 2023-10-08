@@ -1,3 +1,5 @@
+package algorithms;
+
 import java.util.Scanner;
 
 //A entrada consiste de vários casos. A primeira linha contém o inteiro c (1 ≤ c ≤ 10), o número de casos.
