@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-//list04 Q1
 public class Treinamento {
 
     public static FastReader sc = new FastReader();
